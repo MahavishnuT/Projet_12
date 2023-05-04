@@ -1,0 +1,23 @@
+@import "../../style/variables.scss";
+
+header {
+  display: flex;
+  flex-direction: row;
+  background-color: $primary-color;
+  color: white;
+  align-items: center;
+  padding: 20px;
+  justify-content: space-evenly;
+  height: 80px;
+  .main-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 85%;
+    font-weight: 500;
+    font-size: 20px;
+    div {
+      cursor: pointer;
+    }
+  }
+}
