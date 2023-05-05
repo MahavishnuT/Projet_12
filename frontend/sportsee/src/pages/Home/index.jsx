@@ -1,5 +1,7 @@
+const { default: BarChartUI } = require("../../components/BarChart");
+
 function Home() {
-  return <div>Home</div>
+  return <BarChartUI />
 }
 
 export default Home
