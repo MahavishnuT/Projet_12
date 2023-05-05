@@ -1,0 +1,13 @@
+@import "../../style/variables.scss";
+
+.activity-container {
+  background-color: $tertiary-color;
+  .legend {
+    background-color: blue;
+    color: black;
+  }
+  .kilogram-bar {
+    background-color: $secondary-color;
+    color: $secondary-color;
+  }
+}

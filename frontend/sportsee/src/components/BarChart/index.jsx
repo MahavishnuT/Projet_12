@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { USER_ACTIVITY } from '../../data/mockedData'
+import "./barchart.scss"
 
 const data = [
   {
@@ -58,27 +59,28 @@ const data = [
 ]
 
 
-const adaptUserActivity = (userActivity) =>
-  userActivity.sessions.map((session) => {
-    const formattedDay = new Intl.DateTimeFormat('fr', {
-      day: 'numeric',
-    }).format(new Date(session.day))
+// const adaptUserActivity = (userActivity) =>
+//   userActivity.sessions.map((session) => {
+//     const formattedDay = new Intl.DateTimeFormat('fr', {
+//       day: 'numeric',
+//     }).format(new Date(session.day))
 
-    return {
-      day: +formattedDay,
-      kilogram: session.kilogram,
-      calories: session.calories,
-    }
-  })
-console.log(adaptUserActivity(USER_ACTIVITY))
+//     return {
+//       day: +formattedDay,
+//       kilogram: session.kilogram,
+//       calories: session.calories,
+//     }
+//   })
+console.log(data[0].name)
+console.log(USER_ACTIVITY[0].sessions)
 
 function BarChartActivity() {
   return (
-    <ResponsiveContainer width="100%" aspect={4}>
+    <ResponsiveContainer className="activity-container" width="100%" aspect={4}>
       <BarChart
         width={500}
         height={300}
-        data={USER_ACTIVITY}
+        data={USER_ACTIVITY[0].sessions}
         margin={{
           top: 5,
           right: 30,
@@ -86,13 +88,13 @@ function BarChartActivity() {
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
+        <CartesianGrid strokeDasharray="3 2" />
         <XAxis dataKey="day" />
         <YAxis />
         <Tooltip />
-        <Legend />
-        <Bar dataKey="kilogram" fill="#8884d8" />
-        <Bar dataKey="calories" fill="#82ca9d" />
+        <Legend className='legend'/>
+        <Bar dataKey="kilogram"  fill='#E60000'/>
+        <Bar dataKey="calories" fill="#020203" />
       </BarChart>
     </ResponsiveContainer>
   )
