@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Header from './components/Header';
 import "./main.scss"
 import SideBar from './components/SideBar';
+import WelcomeDev from './pages/WelcomeDev';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +14,8 @@ root.render(
       <Header />
       <SideBar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path='/' element={<WelcomeDev />} /> {/* TODO: delete when pushing to prod */}
+        <Route path="/:userId" element={<Home />} />
       </Routes>
     </Router>
   </React.StrictMode>

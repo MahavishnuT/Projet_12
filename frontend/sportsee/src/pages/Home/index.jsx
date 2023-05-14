@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
 import BarChartActivity from '../../components/BarChart'
+import AverageSession from '../../components/LineChart'
+import { fetchActivity, fetchAverage } from '../../services'
+import { useParams } from 'react-router-dom'
+import "./home.scss"
 
 // function adaptUserActivity(userActivity) {
 //   userActivity.map((session) => {
@@ -16,33 +20,51 @@ import BarChartActivity from '../../components/BarChart'
 // }
 
 function Home() {
+  const { userId } = useParams()
   const [activityData, setActivityData] = useState({})
+  const [averageData, setAverageData] = useState({})
   const [isDataLoading, setDataLoading] = useState(false)
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    async function fetchActivity() {
+    async function fetchAllData() {
       setDataLoading(true)
-      try {
-        const response = await fetch(`http://localhost:3000/user/12/activity`)
-        const { activityData } = await response.json()
-        setActivityData(activityData)
-        console.log(activityData)
-      } catch (err) {
-        console.log('===== error =====', err)
-        setError(true)
-      } finally {
-        setDataLoading(false)
-      }
+
+      const { activityData, activityError } = await fetchActivity(userId)
+      setActivityData(activityData)
+
+      const { averageData, averageError } = await fetchAverage(userId)
+      setAverageData(averageData)
+
+      setError(activityError || averageError)
     }
-    fetchActivity()
+    fetchAllData()
   }, [])
 
   if (error) {
     return <span>Oups il y a eu un problème</span>
   }
 
-  return <BarChartActivity activity={activityData.sessions} />
+  return (
+    <section className="home">
+      <div className="presentation">
+        <div className="presentation-title">
+          <h1 className="presentation-title_black">Bonjour</h1>
+          <h1 className="presentation-title_red">Thomas</h1>
+        </div>
+        <span className="presentation-congrats">
+          Félicitation ! Vous avez explosé vos objectifs hier 👏
+        </span>
+      </div>
+      <div className="charts-kind-container">
+        <div className="charts-container">
+          <BarChartActivity activity={activityData.sessions} />
+          <AverageSession average={averageData.sessions} />
+        </div>
+        <div className="kind-container">DONNées</div>
+      </div>
+    </section>
+  )
 }
 
 export default Home

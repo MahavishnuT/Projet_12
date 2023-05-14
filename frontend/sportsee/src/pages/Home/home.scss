@@ -1,0 +1,29 @@
+@import "../../style/variables.scss";
+
+.home {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  position: absolute;
+  left: 180px;
+  top: 100px;
+  .presentation {
+    display: flex;
+    flex-direction: column;
+    &-title {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      &_red {
+        color: $secondary-color;
+      }
+    }
+    &-congrats {
+      font-size: 15px;
+    }
+  }
+  .charts-kind-container {
+    display: block;
+    flex-direction: row;
+  }
+}

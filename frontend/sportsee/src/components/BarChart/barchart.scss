@@ -1,13 +1,48 @@
 @import "../../style/variables.scss";
 
-.activity-container {
-  background-color: $tertiary-color;
-  .legend {
-    background-color: blue;
-    color: black;
+.barChartActivity{
+  margin-top: 0px;
+  grid-column: 1 / 4;
+  justify-self: stretch;
+  width: 100%;
+  height: 100%;
+  background-color: #FBFBFB;
+  border-radius: 5px;
+  position: relative;
+      .title-graph-barchart{
+          font-weight: bold;
+          position: absolute;
+          font-size: 15px;
+          top: 3px;
+          left: 40px;
+      }
+
+      .recharts-legend-wrapper{
+      position: relative;
+      width: 786px;
+      height: auto;
+      left: 0px;
+      bottom: -15px;
+      .recharts-default-legend{
+          font-size: 12px;
+          .recharts-legend-item{
+              right: 0px;
+              top: 0px;
+          }
+      }
   }
-  .kilogram-bar {
-    background-color: $secondary-color;
-    color: $secondary-color;
+
+  .tooltip-barchart{
+      background-color:#E60000;
+      color: white;
+      width: 40px;
+      height: 65px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 7px;
+      font-weight: bold;
   }
 }

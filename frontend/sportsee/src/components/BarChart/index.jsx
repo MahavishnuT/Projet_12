@@ -1,8 +1,6 @@
-import React, { PureComponent } from 'react'
 import {
   BarChart,
   Bar,
-  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -10,35 +8,80 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts'
-import { USER_ACTIVITY } from '../../data/mockedData'
-import "./barchart.scss"
+import './barchart.scss'
 
+function BarChartActivity({ activity }) {
+  let tooltip
+  const CustomTooltip = ({ active, payload }) => {
+    if (!active || !tooltip) {
+      return null
+    } else {
+      return (
+        <div className="tooltip-barchart">
+          <div className="tooltip-barchart-kilogram">{payload[0].value} kg</div>
+          <div className="tooltip-barchart-calories">
+            {payload[1].value} Kcal
+          </div>
+        </div>
+      )
+    }
+  }
 
-// console.log(USER_ACTIVITY[0].sessions)
-
-function BarChartActivity({activity}) {
   return (
-    <ResponsiveContainer className="activity-container" width="100%" aspect={4}>
-      <BarChart
-        width={500}
-        height={300}
-        data={activity}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 2" />
-        <XAxis dataKey="day" />
-        <YAxis />
-        <Tooltip />
-        <Legend className='legend'/>
-        <Bar dataKey="kilogram"  fill='#E60000'/>
-        <Bar dataKey="calories" fill="#020203" />
-      </BarChart>
-    </ResponsiveContainer>
+    <div className="barChartActivity">
+      <p className="title-graph-barchart">Activité quotidienne</p>
+      <ResponsiveContainer width="100%" aspect={3}>
+        <BarChart
+          data={activity}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="index" tickLine={false} axisLine={false} />
+          <YAxis
+            dataKey="calories"
+            orientation="right"
+            type="number"
+            domain={[0, 'dataMax + 50']}
+            fill="#9B9EAC"
+            tickLine={false}
+            tickCount={4}
+            axisLine={false}
+          />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend
+            verticalAlign="top"
+            height={36}
+            align="right"
+            iconType="circle"
+          />
+          <Bar
+            name="Poids (kg)"
+            dataKey="kilogram"
+            fill="#282D30"
+            barSize={7}
+            radius={3}
+            stackId="b"
+            minPointSize={10}
+            onMouseOver={() => (tooltip = 'kilogram')}
+          />
+          <Bar
+            name="Calories brûlées (kCal)"
+            dataKey="calories"
+            fill="#E60000"
+            barSize={7}
+            radius={3}
+            stackId="a"
+            maxBarSize={80}
+            onMouseOver={() => (tooltip = 'calories')}
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
   )
 }
 
