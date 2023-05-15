@@ -19,3 +19,25 @@ export async function fetchAverage(userId) {
       return { averageData: null, averageError: true }
     }
   }
+
+export async function fetchPerformance(userId) {
+    try {
+      const response = await fetch(`http://localhost:3000/user/${userId}/performance`)
+      const { data } = await response.json()
+      return { performanceData: data, performanceError: false }
+    } catch (err) {
+      console.log('===== error =====', err)
+      return { performanceData: null, performanceError: true }
+    }
+  }
+
+export async function fetchDailyScore(userId) {
+    try {
+      const response = await fetch(`http://localhost:3000/user/${userId}`)
+      const { data } = await response.json()
+      return { scoreData: data, scoreError: false }
+    } catch (err) {
+      console.log('===== error =====', err)
+      return { scoreData: null, scoreError: true }
+    }
+  }

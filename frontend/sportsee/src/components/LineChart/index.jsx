@@ -53,7 +53,7 @@ function AverageSession({ average }) {
             content={<CustomTooltip />}
             viewBox={{ x: 30, y: 30, width: 600, height: 600 }}
           />
-          <XAxis dataKey="day" tickLine={false} axisLine={false} />
+          <XAxis dataKey="day" tickLine={false} axisLine={false} stroke='#FFFFFF' opacity={0.5}/>
         </LineChart>
       </ResponsiveContainer>
     </div>

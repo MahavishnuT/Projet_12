@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import BarChartActivity from '../../components/BarChart'
 import AverageSession from '../../components/LineChart'
-import { fetchActivity, fetchAverage } from '../../services'
+import { fetchActivity, fetchAverage, fetchDailyScore, fetchPerformance } from '../../services'
 import { useParams } from 'react-router-dom'
 import "./home.scss"
+import PerformanceChart from '../../components/RadarChart'
+import DailyScore from '../../components/PieChart'
 
 // function adaptUserActivity(userActivity) {
 //   userActivity.map((session) => {
@@ -23,6 +25,8 @@ function Home() {
   const { userId } = useParams()
   const [activityData, setActivityData] = useState({})
   const [averageData, setAverageData] = useState({})
+  const [performanceData, setPerformanceData] = useState({})
+  const [scoreData, setScoreData] = useState({})
   const [isDataLoading, setDataLoading] = useState(false)
   const [error, setError] = useState(false)
 
@@ -36,7 +40,14 @@ function Home() {
       const { averageData, averageError } = await fetchAverage(userId)
       setAverageData(averageData)
 
-      setError(activityError || averageError)
+      const { performanceData, performanceError } = await fetchPerformance(userId)
+      setPerformanceData(performanceData)
+
+      const { scoreData, scoreError } = await fetchDailyScore(userId)
+      setScoreData(scoreData)
+      console.log(scoreData)
+
+      setError(activityError || averageError || performanceError || scoreError)
     }
     fetchAllData()
   }, [])
@@ -60,6 +71,8 @@ function Home() {
         <div className="charts-container">
           <BarChartActivity activity={activityData.sessions} />
           <AverageSession average={averageData.sessions} />
+          <PerformanceChart performance={performanceData.data} />
+          <DailyScore score={scoreData.todayScore} />
         </div>
         <div className="kind-container">DONNées</div>
       </div>
