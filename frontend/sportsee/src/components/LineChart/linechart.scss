@@ -1,6 +1,6 @@
 @import '../../style/variables.scss';
 
-.averageSession {
+.average-session {
   background-color: $secondary-color;
   border-radius: 5px;
   grid-column: 1;
@@ -9,13 +9,17 @@
   height: 100%;
   position: relative;
   .title-graph {
-    width: 140px;
+    width: 90%;
     position: absolute;
     left: 20px;
-    top: 20px;
     color: white;
     font-size: 15px;
     opacity: 0.5;
+  }
+  .recharts-responsive-container {
+    .recharts-wrapper {
+      height: fit-content;
+    }
   }
 }
 

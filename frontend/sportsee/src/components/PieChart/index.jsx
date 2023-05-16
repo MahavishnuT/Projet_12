@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts'
+import "./piechart.scss"
 
 function DailyScore({ score }) {
   // handle "undefined" error
@@ -18,7 +19,7 @@ function DailyScore({ score }) {
         <p className="score-pourcentage">{dailyScore}%</p>
         <p className="texte-score"> de votre objectif</p>
       </div>
-      <ResponsiveContainer width="100%" aspect={3}>
+      <ResponsiveContainer width="100%" height="100%">
         <RadialBarChart
           innerRadius="70%"
           outerRadius="70%"

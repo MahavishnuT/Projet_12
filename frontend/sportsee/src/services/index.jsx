@@ -1,3 +1,5 @@
+
+
 export async function fetchActivity(userId) {
   try {
     const response = await fetch(`http://localhost:3000/user/${userId}/activity`)
@@ -31,13 +33,15 @@ export async function fetchPerformance(userId) {
     }
   }
 
-export async function fetchDailyScore(userId) {
+export async function fetchGeneralData(userId) {
     try {
       const response = await fetch(`http://localhost:3000/user/${userId}`)
       const { data } = await response.json()
-      return { scoreData: data, scoreError: false }
+      return { generalData: data, generalError: false }
     } catch (err) {
       console.log('===== error =====', err)
-      return { scoreData: null, scoreError: true }
+      return { generalData: null, generalError: true }
     }
   }
+
+

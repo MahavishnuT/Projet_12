@@ -18,9 +18,9 @@ function AverageSession({ average }) {
   }
 
   return (
-    <div className="averageSession">
+    <div className="average-session">
       <p className="title-graph">Durée moyenne des sessions</p>
-      <ResponsiveContainer width="100%" aspect={5}>
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart
           data={average}
           margin={{

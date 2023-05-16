@@ -11,6 +11,10 @@ import {
 import './barchart.scss'
 
 function BarChartActivity({ activity }) {
+  const formatXAxis = (tickItem) => {
+    return tickItem + 1
+  }
+
   let tooltip
   const CustomTooltip = ({ active, payload }) => {
     if (!active || !tooltip) {
@@ -30,7 +34,7 @@ function BarChartActivity({ activity }) {
   return (
     <div className="barChartActivity">
       <p className="title-graph-barchart">Activité quotidienne</p>
-      <ResponsiveContainer width="100%" aspect={3}>
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={activity}
           margin={{
@@ -41,7 +45,7 @@ function BarChartActivity({ activity }) {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="index" tickLine={false} axisLine={false} />
+          <XAxis dataKey="day" tickLine={false} axisLine={false} tickFormatter={formatXAxis}/>
           <YAxis
             dataKey="calories"
             orientation="right"

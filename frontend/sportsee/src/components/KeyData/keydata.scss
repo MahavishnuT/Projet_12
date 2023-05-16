@@ -1,0 +1,18 @@
+.keydata-container {
+  display: flex;
+  flex-direction: row;
+  .keydata-img {
+    margin-right: 20px;
+  }
+  .keydata-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    &-title {
+      margin: 10px 0;
+    }
+    &-description {
+      color: #74798C;
+    }
+  }
+}
