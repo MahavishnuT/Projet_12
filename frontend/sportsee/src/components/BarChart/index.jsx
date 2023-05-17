@@ -11,10 +11,6 @@ import {
 import './barchart.scss'
 
 function BarChartActivity({ activity }) {
-  const formatXAxis = (tickItem) => {
-    return tickItem + 1
-  }
-
   let tooltip
   const CustomTooltip = ({ active, payload }) => {
     if (!active || !tooltip) {
@@ -44,14 +40,31 @@ function BarChartActivity({ activity }) {
             bottom: 5,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" tickLine={false} axisLine={false} tickFormatter={formatXAxis}/>
+          <CartesianGrid vertical={false} horizontal={false} />
+          <XAxis
+            dataKey="day"
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={(day) => day.slice(-1)}
+          />
+
           <YAxis
+            yAxisId="right"
+            dataKey="kilogram"
+            orientation="right"
+            type="number"
+            domain={['dataMin - 10', 'dataMax + 10']}
+            tickLine={false}
+            tickCount={4}
+            axisLine={false}
+          />
+          <YAxis
+            yAxisId="left"
+            hide={true}
             dataKey="calories"
             orientation="right"
             type="number"
-            domain={[0, 'dataMax + 50']}
-            fill="#9B9EAC"
+            domain={['dataMin - 10', 'dataMax + 10']}
             tickLine={false}
             tickCount={4}
             axisLine={false}
@@ -64,6 +77,7 @@ function BarChartActivity({ activity }) {
             iconType="circle"
           />
           <Bar
+            yAxisId="right"
             name="Poids (kg)"
             dataKey="kilogram"
             fill="#282D30"
@@ -74,6 +88,7 @@ function BarChartActivity({ activity }) {
             onMouseOver={() => (tooltip = 'kilogram')}
           />
           <Bar
+            yAxisId="left"
             name="Calories brûlées (kCal)"
             dataKey="calories"
             fill="#E60000"

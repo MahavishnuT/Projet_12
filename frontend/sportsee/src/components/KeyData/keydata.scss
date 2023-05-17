@@ -1,6 +1,14 @@
+@import "../../style/variables.scss";
+
 .keydata-container {
   display: flex;
   flex-direction: row;
+  background-color: $tertiary-color;
+  height: 120px;
+  align-items: center;
+  padding: 0 40px;
+  max-width: 200px;
+  border-radius: 5px;
   .keydata-img {
     margin-right: 20px;
   }

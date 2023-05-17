@@ -1,47 +1,109 @@
+import {
+  USER_ACTIVITY,
+  USER_AVERAGE_SESSIONS,
+  USER_MAIN_DATA,
+  USER_PERFORMANCE,
+} from '../data/mockedData'
 
+const numericDayToString = {
+  1: 'L',
+  2: 'M',
+  3: 'M',
+  4: 'J',
+  5: 'V',
+  6: 'S',
+  7: 'D',
+}
+
+const adaptUserAverageSessions = (userAverageSessions) =>
+  userAverageSessions.sessions.map((session) => ({
+    day: numericDayToString[session.day],
+    sessionLength: session.sessionLength,
+  }))
+
+const kindTranslated = {
+  1: 'Cardio',
+  2: 'Energie',
+  3: 'Endurance',
+  4: 'Force',
+  5: 'Vitesse',
+  6: 'Intensité',
+}
+
+const adaptPerformanceKind = (userPerformance) =>
+  userPerformance.data.map((data) => ({
+    value: data.value,
+    kind: kindTranslated[data.kind],
+  }))
 
 export async function fetchActivity(userId) {
   try {
-    const response = await fetch(`http://localhost:3000/user/${userId}/activity`)
+    const response = await fetch(
+      `http://localhost:3000/user/${userId}/activity`
+    )
     const { data } = await response.json()
+
     return { activityData: data, activityError: false }
   } catch (err) {
     console.log('===== error =====', err)
-    return { activityData: null, activityError: true }
+    return {
+      activityData: USER_ACTIVITY.filter(
+        (user) => user.userId === parseInt(userId)
+      )[0],
+      activityError: true,
+    }
   }
 }
 
 export async function fetchAverage(userId) {
-    try {
-      const response = await fetch(`http://localhost:3000/user/${userId}/average-sessions`)
-      const { data } = await response.json()
-      return { averageData: data, averageError: false }
-    } catch (err) {
-      console.log('===== error =====', err)
-      return { averageData: null, averageError: true }
+  try {
+    const response = await fetch(
+      `http://localhost:3000/user/${userId}/average-sessions`
+    )
+    const { data } = await response.json()
+    const adaptedAverageData = adaptUserAverageSessions(data)
+    return { averageData: adaptedAverageData, averageError: false }
+  } catch (err) {
+    console.log('===== error =====', err)
+    return {
+      averageData: adaptUserAverageSessions(
+        USER_AVERAGE_SESSIONS.filter(
+          (user) => user.userId === parseInt(userId)
+        )[0]
+      ),
+      averageError: true,
     }
   }
+}
 
 export async function fetchPerformance(userId) {
-    try {
-      const response = await fetch(`http://localhost:3000/user/${userId}/performance`)
-      const { data } = await response.json()
-      return { performanceData: data, performanceError: false }
-    } catch (err) {
-      console.log('===== error =====', err)
-      return { performanceData: null, performanceError: true }
+  try {
+    const response = await fetch(
+      `http://localhost:3000/user/${userId}/performance`
+    )
+    const { data } = await response.json()
+    const adaptedPerformanceData = adaptPerformanceKind(data)
+    return { performanceData: adaptedPerformanceData, performanceError: false }
+  } catch (err) {
+    console.log('===== error =====', err)
+    return {
+      performanceData: adaptPerformanceKind(
+        USER_PERFORMANCE.filter(
+          (user) => user.userId === parseInt(userId)
+        )[0]
+      ),
+      performanceError: true,
     }
   }
+}
 
 export async function fetchGeneralData(userId) {
-    try {
-      const response = await fetch(`http://localhost:3000/user/${userId}`)
-      const { data } = await response.json()
-      return { generalData: data, generalError: false }
-    } catch (err) {
-      console.log('===== error =====', err)
-      return { generalData: null, generalError: true }
-    }
+  try {
+    const response = await fetch(`http://localhost:3000/user/${userId}`)
+    const { data } = await response.json()
+    return { generalData: data, generalError: false }
+  } catch (err) {
+    console.log('===== error =====', err)
+    return { generalData: USER_MAIN_DATA.filter(user => user.userId === parseInt(userId))[0], generalError: true }
   }
-
-
+}

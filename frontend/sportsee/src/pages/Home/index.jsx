@@ -16,32 +16,20 @@ import calories from '../../assets/calories.svg'
 import protein from '../../assets/protein.svg'
 import carbs from '../../assets/carbs.svg'
 import fat from '../../assets/fat.svg'
+import Loader from '../../components/Loader'
 
 function Home() {
-  const adaptUserActivity = (userActivity) =>
-  userActivity.sessions.map((session) => {
-    const formattedDay = new Intl.DateTimeFormat('fr', { day: 'numeric' }).format(
-      new Date(session.day)
-    );
-
-    return {
-      day: +formattedDay,
-      kilogram: session.kilogram,
-      calories: session.calories,
-    };
-  });
+  
 
   const { userId } = useParams()
   const [activityData, setActivityData] = useState({})
   const [averageData, setAverageData] = useState({})
   const [performanceData, setPerformanceData] = useState({})
   const [generalData, setGeneralData] = useState({})
-  const [isDataLoading, setDataLoading] = useState(false)
-  const [error, setError] = useState(false)
+  const [isDataLoading, setDataLoading] = useState(true)
 
   useEffect(() => {
     async function fetchAllData() {
-      setDataLoading(true)
 
       const { activityData, activityError } = await fetchActivity(userId)
       setActivityData(activityData)
@@ -57,27 +45,23 @@ function Home() {
       const { generalData, generalError } = await fetchGeneralData(userId)
       setGeneralData(generalData)
 
-      setError(
-        activityError || averageError || performanceError || generalError
-      )
+      
+      setDataLoading(false)
     }
+    
     fetchAllData()
   }, [])
 
-  if (error) {
-    return <span>Oups il y a eu un problème</span>
-  }
-
   return (
     <section className="home">
-      {!isDataLoading ? (
-        <span>The data is loading</span>
+      {isDataLoading ? (
+        <Loader />
       ) : (
         <>
           <div className="presentation">
             <div className="presentation-title">
               <h1 className="presentation-title_black">Bonjour</h1>
-              <h1 className="presentation-title_red">Thomas</h1>
+              <h1 className="presentation-title_red">{generalData.userinfos}</h1>
             </div>
             <span className="presentation-congrats">
               Félicitation ! Vous avez explosé vos objectifs hier 👏
@@ -85,34 +69,34 @@ function Home() {
           </div>
           <div className="charts-kind-container">
             <div className="charts-container">
-              <BarChartActivity activity={adaptUserActivity(activityData.sessions)} />
-              <AverageSession average={averageData.sessions} />
-              <PerformanceChart performance={performanceData.data} />
-              <DailyScore score={generalData.todayScore} />
+              <BarChartActivity activity={activityData.sessions} />
+              <AverageSession average={averageData} />
+              <PerformanceChart performance={performanceData} />
+              <DailyScore score={generalData?.score ?? generalData?.todayScore} />
               <div className="keydatas-container">
                 <KeyData
                   picture={calories}
                   unit="kCal"
                   text="Calories"
-                  keydata={generalData.keyData}
+                  keydata={generalData.keyData.calorieCount}
                 />
                 <KeyData
                   picture={protein}
                   unit="g"
                   text="Proteines"
-                  keydata={generalData.keyData}
+                  keydata={generalData.keyData.proteinCount}
                 />
                 <KeyData
                   picture={carbs}
                   unit="g"
                   text="Glucides"
-                  keydata={generalData.keyData}
+                  keydata={generalData.keyData.carbohydrateCount}
                 />
                 <KeyData
                   picture={fat}
                   unit="g"
                   text="Lipides"
-                  keydata={generalData.keyData}
+                  keydata={generalData.keyData.lipidCount}
                 />
               </div>
             </div>

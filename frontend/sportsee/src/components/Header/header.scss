@@ -1,13 +1,17 @@
 @import "../../style/variables.scss";
 
 header {
+  position: fixed;
   display: flex;
   flex-direction: row;
   background-color: $primary-color;
   color: white;
   align-items: center;
   justify-content: space-evenly;
-  height: 10%;
+  height: 15%;
+  max-height: 120px;
+  width: 100%;
+  z-index: 1;
   // min-height: 100px;
   img {
     display: block;

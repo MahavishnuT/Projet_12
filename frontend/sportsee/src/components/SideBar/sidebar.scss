@@ -1,13 +1,14 @@
 @import "../../style/variables.scss";
 
 .side-bar {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: $primary-color;
   bottom: 0;
-  height: 90%;
+  height: 85%;
+  min-height: calc(85% + 120px);
   color: white;
   width: 80px;
   &_logos {

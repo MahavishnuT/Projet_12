@@ -13,6 +13,11 @@
   }
 }
 
+.recharts-polar-angle-axis {
+  transform: scaleY(1.1);
+  transform-origin: 50% 30%;
+}
+
 
 .recharts-polar-angle-axis-tick-value {
   padding: 20px;
