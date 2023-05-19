@@ -49,3 +49,17 @@
     }
   }
 }
+
+@media screen and (max-width: 1024px) and (max-height: 780px) {
+  .home {
+    .charts-kind-container {
+      top: 120px;
+      .charts-container {
+        grid-template-rows: 210px 210px;
+        .keydatas-container {
+          width: 150px;
+        }
+      }
+    }
+  }
+}

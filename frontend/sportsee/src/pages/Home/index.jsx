@@ -18,10 +18,17 @@ import carbs from '../../assets/carbs.svg'
 import fat from '../../assets/fat.svg'
 import Loader from '../../components/Loader'
 
-function Home() {
-  
+/**
+ * 
+ * @returns Home Page
+ */
 
+function Home() {
+
+  // Using useParams to retrieve the user's id
   const { userId } = useParams()
+
+  // Initializing all the useState hooks 
   const [activityData, setActivityData] = useState({})
   const [averageData, setAverageData] = useState({})
   const [performanceData, setPerformanceData] = useState({})
@@ -29,8 +36,10 @@ function Home() {
   const [isDataLoading, setDataLoading] = useState(true)
 
   useEffect(() => {
+    /**
+     Retrieves all the data from the api or the mockedData.js file
+     */
     async function fetchAllData() {
-
       const { activityData, activityError } = await fetchActivity(userId)
       setActivityData(activityData)
 
@@ -45,10 +54,9 @@ function Home() {
       const { generalData, generalError } = await fetchGeneralData(userId)
       setGeneralData(generalData)
 
-      
       setDataLoading(false)
     }
-    
+
     fetchAllData()
   }, [])
 
@@ -61,7 +69,7 @@ function Home() {
           <div className="presentation">
             <div className="presentation-title">
               <h1 className="presentation-title_black">Bonjour</h1>
-              <h1 className="presentation-title_red">{generalData.userinfos}</h1>
+              <h1 className="presentation-title_red">{generalData.userInfos.firstName}</h1>
             </div>
             <span className="presentation-congrats">
               Félicitation ! Vous avez explosé vos objectifs hier 👏

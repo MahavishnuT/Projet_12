@@ -1,0 +1,18 @@
+@import "../../style/variables.scss";
+
+.links-container {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  gap: 50px;
+  button {
+    background-color: $secondary-color;
+    color: white;
+    border-radius: 5px;
+    width: 180px;
+    height: 70px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;  }
+}

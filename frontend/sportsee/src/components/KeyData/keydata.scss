@@ -24,3 +24,16 @@
     }
   }
 }
+
+@media screen and (max-width: 1024px) and (max-height: 780px) {
+  .keydata-container {
+    padding: 0 20px;
+    width: 180px;
+    height: 100px;
+    .keydata-text {
+      &-title {
+        font-size: 20px;
+      }
+    }
+  }
+}

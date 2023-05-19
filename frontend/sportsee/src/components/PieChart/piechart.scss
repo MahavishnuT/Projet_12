@@ -44,50 +44,12 @@
   }
 }
 
-// .ScoreChart {
-//   background-color: white;
-//   width: 200px;
-//   height: 100%;
-//   padding: 4px;
-//   position: relative;
-//   grid-column: 3;
-//   grid-row: 2;
-
-//   &_title {
-//     width: 70%;
-//     position: absolute;
-//     top: 24px;
-//     left: 30px;
-//   }
-
-//   &_legend {
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//     height: 161px;
-//     width: 161px;
-//     border-radius: 50%;
-//     background-color: transparent;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-
-//     p {
-//       color: transparent;
-//       width: 40%;
-//       margin: auto;
-//       text-align: center;
-//       font-size: 16px;
-//       line-height: 26px;
-//     }
-
-//     &_score {
-//       font-weight: bold;
-//       font-size: 26px;
-//     }
-//   }
-//   .recharts-sector:first-child {
-//     display: none;
-//   }
-// }
+@media screen and (max-width: 1024px) and (max-height: 780px) {
+  .radialchart {
+    &-score {
+      font-size: 12px;
+      top: 5%;
+      left: 5%;
+    }
+  }
+}

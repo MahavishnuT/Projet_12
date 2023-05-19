@@ -11,19 +11,6 @@ import {
 import PropTypes from 'prop-types'
 import "./radarchart.scss"
 
-function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
-  return (
-    <Text
-      {...rest}
-      verticalAnchor="middle"
-      y={y + (y - cy) / 2}
-      x={x + (x - cx) / 2}
-    >
-      {payload.value}
-    </Text>
-  );
-}
-
 function PerformanceChart({ performance }) {
   // handle "undefined" error
   if (!performance) {
@@ -59,3 +46,7 @@ function PerformanceChart({ performance }) {
 }
 
 export default PerformanceChart
+
+PerformanceChart.propTypes =  {
+  performance: PropTypes.array
+}

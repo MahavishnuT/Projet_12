@@ -1,4 +1,6 @@
 import "./keydata.scss"
+import PropTypes from 'prop-types'
+
 
 function KeyData({picture, unit, text, keydata}) {
   return (
@@ -13,3 +15,10 @@ function KeyData({picture, unit, text, keydata}) {
 }
 
 export default KeyData
+
+KeyData.propTypes = {
+  picture: PropTypes.string,
+  unit: PropTypes.string,
+  text: PropTypes.string,
+  keydata: PropTypes.number
+}

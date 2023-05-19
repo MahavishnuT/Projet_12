@@ -9,8 +9,16 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import './barchart.scss'
+import PropTypes from 'prop-types'
+
 
 function BarChartActivity({ activity }) {
+  // Handle "undefined" error
+  if (!activity) {
+    return null
+  }
+
+  // Creating a custom tooltip
   let tooltip
   const CustomTooltip = ({ active, payload }) => {
     if (!active || !tooltip) {
@@ -105,3 +113,7 @@ function BarChartActivity({ activity }) {
 }
 
 export default BarChartActivity
+
+BarChartActivity.propTypes = {
+  activity: PropTypes.array
+}

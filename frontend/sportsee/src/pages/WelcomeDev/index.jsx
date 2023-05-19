@@ -1,3 +1,4 @@
+import "./welcomedev.scss"
 import { Link } from 'react-router-dom'
 
 function WelcomeDev() {

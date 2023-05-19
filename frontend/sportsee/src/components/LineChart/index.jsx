@@ -1,8 +1,9 @@
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import './linechart.scss'
+import PropTypes from 'prop-types'
 
 function AverageSession({ average }) {
-  // handle "undefined" error
+  // Handle "undefined" error
   if (!average) {
     return null
   }
@@ -67,3 +68,7 @@ function AverageSession({ average }) {
 }
 
 export default AverageSession
+
+AverageSession.propTypes = {
+  average: PropTypes.array
+}

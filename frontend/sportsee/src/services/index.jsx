@@ -15,6 +15,11 @@ const numericDayToString = {
   7: 'D',
 }
 
+/**
+ * Changes the index numbers to the days of the week on the Average Chart
+ * @param {Array} userAverageSessions
+ * @returns
+ */
 const adaptUserAverageSessions = (userAverageSessions) =>
   userAverageSessions.sessions.map((session) => ({
     day: numericDayToString[session.day],
@@ -30,12 +35,22 @@ const kindTranslated = {
   6: 'Intensité',
 }
 
+/**
+ * Translate in french the data kind on the Score Chart
+ * @param {Array} userPerformance
+ * @returns
+ */
 const adaptPerformanceKind = (userPerformance) =>
   userPerformance.data.map((data) => ({
     value: data.value,
     kind: kindTranslated[data.kind],
   }))
 
+/**
+ * All the functions below retrieve the data from either the api or the mockedData.js file if the api is not running
+ * @param {number} userId
+ * @returns
+ */
 export async function fetchActivity(userId) {
   try {
     const response = await fetch(
@@ -88,9 +103,7 @@ export async function fetchPerformance(userId) {
     console.log('===== error =====', err)
     return {
       performanceData: adaptPerformanceKind(
-        USER_PERFORMANCE.filter(
-          (user) => user.userId === parseInt(userId)
-        )[0]
+        USER_PERFORMANCE.filter((user) => user.userId === parseInt(userId))[0]
       ),
       performanceError: true,
     }
@@ -104,6 +117,11 @@ export async function fetchGeneralData(userId) {
     return { generalData: data, generalError: false }
   } catch (err) {
     console.log('===== error =====', err)
-    return { generalData: USER_MAIN_DATA.filter(user => user.userId === parseInt(userId))[0], generalError: true }
+    return {
+      generalData: USER_MAIN_DATA.filter(
+        (user) => user.id === parseInt(userId)
+      )[0],
+      generalError: true,
+    }
   }
 }
