@@ -1,64 +1,57 @@
-# Project 9 - Front-end Dashboard
+<p align="center">
+  <img src="frontend/sportsee/src/assets/logo.svg"  alt="" width="256">
+</p>
 
-This repo contains all the source code to run the micro API for the sports analytics dashboard SportSee.
+<h1 align="center">SportSee</h1>
 
-## 1. General information
+<p align="center">
+  This is the source code for SportSee analytics dashboard.
+</p>
 
-To start this project, you are free to use Docker or not. In this documentation, we will see several methods to launch the project easily.
+## Prerequisites
 
-## 2. Project (**without Docker**)
-
-### 2.1 Prerequisites
-
-- [NodeJS (**version 12.18**)](https://nodejs.org/en/)
+- [NodeJS (at least v16.0)](https://nodejs.org/en/)
 - [Yarn](https://yarnpkg.com/)
+- [Npm](https://www.npmjs.com)
 
-If you are working with several versions of NodeJS, we recommend you install [nvm](https://github.com/nvm-sh/nvm). This tool will allow you to easily manage your NodeJS versions.
+You need to have SportSee's API running. [Read more here](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard).
 
-### 2.2 Launching the project
+## Install
 
-- Fork the repository
-- Clone it on your computer.
-- The `yarn` command will allow you to install the dependencies.
-- The `yarn dev` command will allow you to run the micro API.
+Clone this repository
+```bash
+git clone https://github.com/MahavishnuT/Projet_12 SportSee && cd frontend/sportsee
+```
 
-
-## 3. Project (**with Docker**)
-
-### 2.1 Prerequisites
-
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
-
-### 2.2 Starting the project
-
-- The `docker image build --no-cache -t micro-api .` command will allow you to build your image.
-- The `docker container run --name micro-api -p 3000:3000 -dt micro-api yarn` command will allow you to create your Docker container and run your image on port 3000.
-- The `docker container stop micro-api` command will allow you to stop your micro-api.
-- The `docker container rm micro-api` command will allow you to delete your micro-api container.
-
-### 2.3 Vscode and container remotes
-
-Finally, if you have VsCode, you can easily launch your project in a docker environment.
-
-You will need the [Remote Development extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack). Once you have this extension installed, just click on the `Reopen in Container` button.
-
-Once in the container, run the `yarn dev` command.
-
-## 4. Endpoints
-
-### 4.1 Possible endpoints
-
-This project includes four endpoints that you will be able to use: 
-
-- `http://localhost:3000/user/${userId}` - retrieves information from a user. This first endpoint includes the user id, user information (first name, last name and age), the current day's score (todayScore) and key data (calorie, macronutrient, etc.).
-- `http://localhost:3000/user/${userId}/activity` - retrieves a user's activity day by day with kilograms and calories.
-- `http://localhost:3000/user/${userId}/average-sessions` - retrieves the average sessions of a user per day. The week starts on Monday.
-- `http://localhost:3000/user/${userId}/performance` - retrieves a user's performance (energy, endurance, etc.).
+Install dependencies
+```bash
+yarn install or npm install
+```
 
 
-**Warning, currently only two users have been mocked. They have userId 12 and 18 respectively.**
+Start the app in development mode
+```bash
+yarn start or npm start
+```
+Launch the backend first that you can find in the /api file, follow the instructions for the backend on the other repo. Then launch the app.
+The app is served at [http://localhost:3001](http://localhost:3001) if the API is served on port 3000 (default). The page will reload if you make edits.
 
-### 4.2 Examples of queries
+## Usage
+As the authentification is not yet implemented, you need to provide a user id through the GET param `userId`.
+Two buttons were implemented to navigate through the app, but they will be taken off as the app development carries on.
 
-- `http://localhost:3000/user/12/performance` - Retrieves the performance of the user with id 12
-- `http://localhost:3000/user/18` - Retrieves user 18's main information.
+***Currently, two users have been mocked in the provided API. They have id 12 and 18 respectively***
+
+## Deploy
+
+Build the app for production to the `build` folder.
+```bash
+yarn build or npm build
+```
+
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+The app is ready to be deployed!
+
+Read Create-React-App doc about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
