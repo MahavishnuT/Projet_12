@@ -8,7 +8,7 @@ function DailyScore({ score }) {
   if (!score) {
     return null
   }
-  
+
   const dailyScore = score * 100
   // Adapting data that way so the Radial Chart can display them out of a 100
   const data = [
@@ -21,6 +21,8 @@ function DailyScore({ score }) {
       fill: 'red',
     },
   ]
+
+  
 
   return (
     <div className="radialchart">
@@ -43,11 +45,11 @@ function DailyScore({ score }) {
           barSize={10}
           data={data}
           startAngle={90}
+          endAngle={(dailyScore * 360) / 100 + 90 }
           blendStroke
         >
           <RadialBar
             cornerRadius="50%"
-            minAngle={50}
             clockWise
             dataKey="score"
           />
@@ -60,5 +62,5 @@ function DailyScore({ score }) {
 export default DailyScore
 
 DailyScore.propTypes = {
-  score : PropTypes.number
+  score: PropTypes.number,
 }
